@@ -1,80 +1,81 @@
-- name: install catalogue component
-  hosts: catalogue
+- name: install user component
+  hosts: user
   become: 'yes'
   tasks:
     - name: Setup NPM source
       ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-
+    
     - name: install nodejs
       ansible.builtin.yum:
         name: nodejs
         state: installed
-
+    
     - name: check roboshop user exist or not
       ansible.builtin.command: id roboshop
       register: out
       ignore_errors: true
-
+    
     - when: out.rc != 0
       name: create roboshop user
       become: 'yes'
       ansible.builtin.user:
         name: roboshop
-
+    
     - name: check /app directory exists or not
       ansible.builtin.stat:
         path: /app
         register: directory
-
+    
     - name: print directory stat
       ansible.builtin.debug:
         msg: 'output: {{directory}}'
-
+    
     - when: directory stat.exists == False
       name: create /app directory
       ansible.builtin.file:
         path: /app
         state: directory
-
-    - name: download catalogue artifact
+    
+    - name: download user artifact
       ansible.builtin.get_url:
-        url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+        url: https://roboshop-builds.s3.amazonaws.com/user.zip
         dest: /tmp
-
-    - name: extract catalogue artifact
+    
+    - name: extract user artifact
       ansible.builtin.unarchive:
-        src: /tmp/catalogue.zip
+        src: /tmp/user.zip
         dest: /app
-
+        remote_src: 'yes'
+    
     - name: download the dependencies
       ansible.builtin.command: npm install
       args:
         chdir: /app
-
-    - name: copy file catalogue.service
+    
+    - name: copy file user.service
       ansible.builtin.copy:
-        src: catalogue.service
-        dest: /etc/systemd/system/catalogue.service
-
+        src: user.service
+        dest: /etc/systemd/system/user.service
+    
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-
+    
     - name: copy file mongo.repo to yum.repos.d
       ansible.builtin.copy:
         src: mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
-
-    - name: install MongoDB
+    
+    - name: install mongodb-org-shell
       ansible.builtin.yum:
         name: mongodb-org-shell
         state: installed
-
-    - name: load catalogue data
-      ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS < /app/schema/catalogue.js
     
-    - name: reStart and enable catalogue
+    - name: load user data
+      ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS < /app/schema/user.js
+    
+    - name: restart user
       ansible.builtin.service:
-        name: catalogue
+        name: user
         state: restarted
         enabled: true
