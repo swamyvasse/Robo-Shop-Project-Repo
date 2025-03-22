@@ -3,7 +3,7 @@
   become: 'yes'
   tasks:
     - name: Setup NPM source
-      ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+      ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash" 
     
     - name: install nodejs
       ansible.builtin.yum:
@@ -28,7 +28,7 @@
     
     - name: print directory stat
       ansible.builtin.debug:
-        msg: 'output: {{directory}}'
+        msg: "output: {{directory}}"
     
     - when: directory stat.exists == False
       name: create /app directory

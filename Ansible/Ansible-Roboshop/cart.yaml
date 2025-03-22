@@ -1,5 +1,5 @@
-- name: install catalogue component
-  hosts: catalogue
+- name: install cart component
+  hosts: cart
   become: 'yes'
   tasks:
     - name: Setup NPM source
@@ -36,45 +36,33 @@
         path: /app
         state: directory
 
-    - name: download catalogue artifact
+    - name: download cart artifact
       ansible.builtin.get_url:
-        url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+        url: https://roboshop-builds.s3.amazonaws.com/cart.zip
         dest: /tmp
 
-    - name: extract catalogue artifact
+    - name: extract cart artifact
       ansible.builtin.unarchive:
-        src: /tmp/catalogue.zip
+        src: /tmp/cart.zip
         dest: /app
+        remote_src: 'yes'
 
     - name: download the dependencies
       ansible.builtin.command: npm install
       args:
         chdir: /app
 
-    - name: copy file catalogue.service
+    - name: copy file cart.service
       ansible.builtin.copy:
-        src: catalogue.service
-        dest: /etc/systemd/system/catalogue.service
+        src: cart.service
+        dest: /etc/systemd/system/cart.service
 
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-
-    - name: copy file mongo.repo to yum.repos.d
-      ansible.builtin.copy:
-        src: mongo.repo
-        dest: /etc/yum.repos.d/mongo.repo
-
-    - name: install MongoDB
-      ansible.builtin.yum:
-        name: mongodb-org-shell
-        state: installed
-
-    - name: load catalogue data
-      ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS < /app/schema/catalogue.js
-    
-    - name: reStart and enable catalogue
+        
+    - name: restart and enable cart
       ansible.builtin.service:
-        name: catalogue
+        name: cart
         state: restarted
         enabled: true
