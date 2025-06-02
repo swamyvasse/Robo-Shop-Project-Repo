@@ -48,3 +48,13 @@ ssh -i devops.pem ec2-user@52.23.200.107
 
 $ --> indicates normal user 
 # --> indicates root user
+
+1) what is the differnce b/w wget & wget curl?
+wget <url> --> it is used to download the files into linux server
+wget curl <url>  ---> it is used to show the content(instead of downloading) in terminal
+
+2)what is the difference b/w cut & awk commands?
+cut ---> cut and awk we can use it for the delimitation purpose you can choose any delimiter and cut the text but awk has another usage i.e column based
+ 
+cut ----> cut -d / -f1
+awk ----> awk -F / '{print $1F}'
