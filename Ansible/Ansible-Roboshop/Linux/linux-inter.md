@@ -58,3 +58,8 @@ cut ---> cut and awk we can use it for the delimitation purpose you can choose a
  
 cut ----> cut -d / -f1
 awk ----> awk -F / '{print $1F}'
+
+3)how to change ownership in linux?
+the command is chown and we have root access otherwise we don't
+chown <user-name>:<group-name> -R <folder or file-name>
+

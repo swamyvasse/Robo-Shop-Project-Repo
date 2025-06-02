@@ -54,6 +54,33 @@ User/owner ---> the one who created the file
 Group ---> Generally the group belongs to or any group 
 Others ---> other than user and group
 
+user management:--
+----------------------------
+create user ---> useradd <user-name>
+delete user ---> userdel <user-name>
+password user ---> passwd <user-name>
+create group ---> groupadd <group-name>
+delete group ---> groupdel <group-name>
+
+we want to add user into group (primary)
+usermod -g <group-name> <user-name>
+
+we want to add user into group (secondary)
+usermod -aG <group-name> <user-name>
+
+we want remove user from secondary group (secondary)
+gpasswd -d <user-name> <group-name>
+
+we want to change owner ship 
+chown <user-name>:<group-name> -R folder-name
+
+
+what is the process for sharing public-key access?
+first we need to create mkdir swamy
+go to home folder 
+
+
+
 
 
 

@@ -1,0 +1,2 @@
+Proficient in using core Linux commands (ls, cp, mv, rm, grep, find, cat, tail, head) for efficient file and system management
+Managed file and directory permissions using chmod, chown, and chgrp to enforce access control and user-level security
