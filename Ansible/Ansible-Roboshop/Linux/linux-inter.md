@@ -63,3 +63,5 @@ awk ----> awk -F / '{print $1F}'
 the command is chown and we have root access otherwise we don't
 chown <user-name>:<group-name> -R <folder or file-name>
 
+4)there is running a lot of processes how can you search for java process?
+the command is ps -ef | grep java

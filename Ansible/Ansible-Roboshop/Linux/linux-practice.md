@@ -79,7 +79,28 @@ what is the process for sharing public-key access?
 first we need to create mkdir swamy
 go to home folder 
 
+process management:--
+-----------------------------
+how to search process ps -ef | grep <process-name>
+kill the process --> kill <PID> you are requesting end the task
+kill the process ---> kill 9 <PID> you are forcing to end the task
+top ---> it will shows all process 
 
+package management:---
+----------------------------------
+ubuntu --> apt-get
+centos ---> yum
+aws linux ---> amazon-linux-extra and yum 
+
+i want to install git in aws linux 2
+
+sudo amazon-linux-extras install epel -y
+
+yum install git -y 
+
+yum remove git -y 
+
+yum list all --> it will shows all packages including install pakages
 
 
 

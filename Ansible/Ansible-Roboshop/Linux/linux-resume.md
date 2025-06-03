@@ -1,2 +1,5 @@
-Proficient in using core Linux commands (ls, cp, mv, rm, grep, find, cat, tail, head) for efficient file and system management
-Managed file and directory permissions using chmod, chown, and chgrp to enforce access control and user-level security
+Administered Linux systems across multi-user environments, utilizing advanced file management (ls, cp, mv, rm, grep, find) and system monitoring tools (ps, top, htop, kill) to optimize performance and troubleshoot issues using nice, renice, and resource analysis techniques.
+
+Managed user and group accounts to enforce security and access control, employing tools like useradd, usermod, groupadd, passwd, chmod, chown, and chgrp to maintain secure and efficient system operations.
+
+Performed cross-platform package management on Debian and RHEL-based systems, including Amazon Linux 2, by installing, updating, and removing system and application-level software using apt and yum.
